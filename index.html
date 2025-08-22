@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy Governance Ireland</title>
+    <meta name="description" content="Build your ideal Irish government with the right people for the right jobs. Inspired by The Paul Principle.">
+    <meta property="og:title" content="Fantasy Governance Ireland">
+    <meta property="og:description" content="Build your ideal Irish government with real experts and community champions. Discover Ireland's hidden 'Pauls' who could transform governance.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fantasy Governance Ireland">
+    <meta name="twitter:description" content="Build your ideal Irish government with real experts and community champions.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Light theme */
+        body.light {
+            --bg-primary: #f9fafb;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f3f4f6;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --text-tertiary: #9ca3af;
+            --border: #e5e7eb;
+            --border-secondary: #d1d5db;
+            --blue: #2563eb;
+            --blue-hover: #1d4ed8;
+            --blue-light: #dbeafe;
+            --blue-text: #1e40af;
+            --green: #059669;
+            --green-hover: #047857;
+            --green-light: #ecfdf5;
+            --green-text: #065f46;
+            --purple-light: #f3e8ff;
+            --purple-text: #7c3aed;
+        }
+
+        /* Dark theme */
+        body.dark {
+            --bg-primary: #111827;
+            --bg-secondary: #1f2937;
+            --bg-tertiary: #374151;
+            --text-primary: #ffffff;
+            --text-secondary: #d1d5db;
+            --text-tertiary: #9ca3af;
+            --border: #4b5563;
+            --border-secondary: #6b7280;
+            --blue: #3b82f6;
+            --blue-hover: #2563eb;
+            --blue-light: #1e3a8a;
+            --blue-text: #bfdbfe;
+            --green: #059669;
+            --green-hover: #047857;
+            --green-light: #064e3b;
+            --green-text: #6ee7b7;
+            --purple-light: #581c87;
+            --purple-text: #e9d5ff;
+        }
+
+        .container {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .header {
+            background-color: var(--bg-secondary);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .theme-toggle {
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            background-color: var(--bg-tertiary);
+            font-size: 1.2rem;
+            transition: background-color 0.2s;
+        }
+
+        .theme-toggle:hover {
+            opacity: 0.8;
+        }
+
+        .description {
+            color: var(--text-secondary);
+        }
+
+        .stats {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: var(--text-tertiary);
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr 2fr;
+            }
+        }
+
+        .sidebar {
+            background-color: var(--bg-secondary);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+        .sidebar-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .position-card {
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .position-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .position-title {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .select-btn {
+            font-size: 0.875rem;
+            color: var(--blue);
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .select-btn:hover {
+            color: var(--blue-hover);
+        }
+
+        .position-desc {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .selected-candidate {
+            background-color: var(--bg-tertiary);
+            border-radius: 0.25rem;
+            padding: 0.5rem;
+        }
+
+        .no-candidate {
+            background-color: var(--bg-tertiary);
+            border-radius: 0.25rem;
+            padding: 0.5rem;
+            text-align: center;
+            color: var(--text-tertiary);
+        }
+
+        .nominate-btn {
+            width: 100%;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            border: none;
+            background-color: var(--green);
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .nominate-btn:hover {
+            background-color: var(--green-hover);
+        }
+
+        .candidates-section {
+            background-color: var(--bg-secondary);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .search-container {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 0.375rem;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        .candidates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .candidate-card {
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            background-color: var(--bg-secondary);
+            transition: box-shadow 0.2s;
+        }
+
+        .candidate-card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .candidate-name {
+            font-weight: 600;
+            font-size: 1.125rem;
+            color: var(--text-primary);
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .type-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .type-known {
+            background-color: var(--blue-light);
+            color: var(--blue-text);
+        }
+
+        .type-community {
+            background-color: var(--green-light);
+            color: var(--green-text);
+        }
+
+        .type-expert {
+            background-color: var(--purple-light);
+            color: var(--purple-text);
+        }
+
+        .votes {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .candidate-info {
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .candidate-expertise {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .achievements {
+            margin-bottom: 0.75rem;
+        }
+
+        .achievement {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+        }
+
+        .action-btn {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            border: none;
+            background-color: var(--blue);
+            color: white;
+            cursor: pointer;
+        }
+
+        .action-btn:hover {
+            background-color: var(--blue-hover);
+        }
+
+        .select-full-btn {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            border: none;
+            background-color: var(--blue);
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .select-full-btn:hover {
+            background-color: var(--blue-hover);
+        }
+
+        .paul-principle {
+            margin-top: 1.5rem;
+            border: 1px solid var(--green);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            background-color: var(--green-light);
+        }
+
+        .principle-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--green-text);
+        }
+
+        .principle-text {
+            font-size: 0.875rem;
+            color: var(--green-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .principle-btn {
+            text-decoration: underline;
+            font-weight: 500;
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            z-index: 50;
+        }
+
+        .modal-content {
+            max-width: 32rem;
+            width: 100%;
+            max-height: 85vh;
+            border-radius: 0.5rem;
+            background-color: var(--bg-secondary);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            overflow: auto;
+            padding: 1.5rem;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .close-btn {
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .modal-info {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            background-color: var(--blue-light);
+            border: 1px solid var(--blue);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 0.375rem;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 0.75rem;
+            padding-top: 1rem;
+        }
+
+        .btn-primary {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            border: none;
+            font-weight: 500;
+            background-color: var(--blue);
+            color: white;
+            cursor: pointer;
+        }
+
+        .btn-secondary {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            border: 1px solid var(--border);
+            background-color: transparent;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem 0;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body class="dark">
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <h1 class="title">Fantasy Governance Ireland</h1>
+                <button class="theme-toggle" onclick="toggleTheme()" title="Switch theme">
+                    <span id="theme-icon">☀️</span>
+                </button>
+            </div>
+            <p class="description">Build your ideal Irish government with the right people for the right jobs</p>
+            <div class="stats">
+                <span>👥 18 candidates available</span>
+                <span>📅 Updated daily</span>
+            </div>
+        </div>
+
+        <div class="main-grid">
+            <!-- Government Positions Sidebar -->
+            <div class="sidebar">
+                <h2 class="sidebar-title">Your Government</h2>
+                <div id="positions-container">
+                    <!-- Positions will be populated by JavaScript -->
+                </div>
+                <button class="nominate-btn" onclick="showNomination()">
+                    Nominate Someone New
+                </button>
+            </div>
+
+            <!-- Candidates Section -->
+            <div class="candidates-section">
+                <div class="section-header">
+                    <h2 class="sidebar-title" id="candidates-title">All Candidates</h2>
+                    <button class="select-btn hidden" id="view-all-btn" onclick="clearActivePosition()">
+                        View All
+                    </button>
+                </div>
+
+                <div class="search-container">
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        placeholder="Search candidates by name, expertise, or background..."
+                        id="search-input"
+                        oninput="filterCandidates()"
+                    >
+                </div>
+
+                <div class="candidates-grid" id="candidates-grid">
+                    <!-- Candidates will be populated by JavaScript -->
+                </div>
+
+                <div class="no-results hidden" id="no-results">
+                    <p>No candidates found matching your criteria</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- The Paul Principle Section -->
+        <div class="paul-principle">
+            <h3 class="principle-title">🐝 The Paul Principle</h3>
+            <p class="principle-text">
+                "There are many 'Pauls' in Irish life - competent people with track records who would be much better suited to particular postings than the traditional political class." 
+                <em> - Inspired by Paul Handrick, who created Ireland's first native wild bee sanctuary and advocates for practical biodiversity solutions.</em>
+            </p>
+            <p class="principle-text">
+                Think Dr. Gabriel Scally for health, Sister Stan for housing, Paul Handrick for environment, Dr. Abeba Birhane for technology, or Aoibhinn Ní Shúilleabháin for education - experts with proven track records in their fields.
+            </p>
+            <p class="principle-text">
+                Know someone who should be in government? <button class="principle-btn" onclick="showNomination()">Nominate them</button> and tell us why they'd be perfect for the job.
+            </p>
+        </div>
+
+        <!-- Nomination Modal -->
+        <div class="modal hidden" id="nomination-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Nominate a Candidate</h3>
+                    <button class="close-btn" onclick="hideNomination()">×</button>
+                </div>
+                
+                <div class="modal-info">
+                    <p style="color: var(--blue-text); font-size: 0.875rem;">
+                        <strong>The Paul Principle in action!</strong> Help us discover the hidden experts in Irish communities who could transform governance.
+                    </p>
+                </div>
+
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">Full Name *</label>
+                        <input type="text" class="form-input" placeholder="e.g., Paul Handrick">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Ideal Position *</label>
+                        <select class="form-input">
+                            <option value="">Select a position...</option>
+                            <option value="taoiseach">Taoiseach</option>
+                            <option value="environment">Minister for Environment</option>
+                            <option value="health">Minister for Health</option>
+                            <option value="education">Minister for Education</option>
+                            <option value="housing">Minister for Housing</option>
+                            <option value="finance">Minister for Finance</option>
+                            <option value="foreign">Minister for Foreign Affairs</option>
+                            <option value="justice">Minister for Justice</option>
+                            <option value="technology">Minister for Technology & Innovation</option>
+                            <option value="energy">Minister for Energy</option>
+                            <option value="rural">Minister for Rural Affairs</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-primary">Submit Nomination</button>
+                        <button type="button" class="btn-secondary" onclick="hideNomination()">Back</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let selectedCabinet = {};
+        let activePosition = '';
+        let searchTerm = '';
+        let isDarkMode = true;
+
+        // Government positions
+        const positions = [
+            { id: 'taoiseach', title: 'Taoiseach', description: 'Head of Government' },
+            { id: 'environment', title: 'Minister for Environment', description: 'Climate & Environmental Policy' },
+            { id: 'health', title: 'Minister for Health', description: 'Healthcare System Management' },
+            { id: 'education', title: 'Minister for Education', description: 'Education Policy & Reform' },
+            { id: 'housing', title: 'Minister for Housing', description: 'Housing Crisis & Urban Planning' },
+            { id: 'finance', title: 'Minister for Finance', description: 'Economic Policy & Budget' },
+            { id: 'foreign', title: 'Minister for Foreign Affairs', description: 'International Relations' },
+            { id: 'justice', title: 'Minister for Justice', description: 'Law Enforcement & Legal Reform' },
+            { id: 'technology', title: 'Minister for Technology & Innovation', description: 'Digital Policy & AI Governance' },
+            { id: 'energy', title: 'Minister for Energy', description: 'Energy Transition & Climate Action' },
+            { id: 'rural', title: 'Minister for Rural Affairs', description: 'Agriculture, Food & Rural Development' }
+        ];
+
+        // Candidates data
+        const candidates = [
+            {
+                id: 1,
+                name: "Dr. Mary Robinson",
+                expertise: "Human Rights, Environmental Law",
+                background: "Former President, UN Climate Envoy",
+                location: "Dublin",
+                suitableFor: ['foreign', 'environment'],
+                type: 'known',
+                achievements: ["First female President of Ireland", "UN Special Envoy on Climate Change", "Champion of human rights"],
+                votes: 847
+            },
+            {
+                id: 2,
+                name: "Paul Handrick (The Bee Guy)",
+                expertise: "Native Bee Conservation, Biodiversity Policy",
+                background: "Founder of Ireland's first native wild bee sanctuary",
+                location: "Wicklow",
+                suitableFor: ['environment'],
+                type: 'community',
+                achievements: ["Created first native wild bee sanctuary on the planet", "No Mow May campaign advocate", "Practical biodiversity solutions for communities"],
+                votes: 823
+            },
+            {
+                id: 3,
+                name: "Dr. Gabriel Scally",
+                expertise: "Public Health, Healthcare Systems",
+                background: "Public Health Medicine",
+                location: "Cork",
+                suitableFor: ['health'],
+                type: 'expert',
+                achievements: ["Led major healthcare investigations", "Public health policy expertise", "International health advisor"],
+                votes: 534
+            },
+            {
+                id: 4,
+                name: "Sister Stan Kennedy",
+                expertise: "Social Justice, Community Development",
+                background: "Social Activist, Community Leader",
+                location: "Dublin",
+                suitableFor: ['housing', 'justice'],
+                type: 'community',
+                achievements: ["40+ years community work", "Housing rights advocacy", "Founded multiple support organizations"],
+                votes: 712
+            },
+            {
+                id: 5,
+                name: "Prof. Orla Feely",
+                expertise: "Engineering, Innovation, Education",
+                background: "Former UCD President",
+                location: "Dublin",
+                suitableFor: ['education'],
+                type: 'expert',
+                achievements: ["Led major university transformation", "STEM education advocate", "Research excellence"],
+                votes: 456
+            },
+            {
+                id: 6,
+                name: "Colm McCarthy",
+                expertise: "Economics, Public Finance",
+                background: "Economist, Policy Analyst",
+                location: "Dublin",
+                suitableFor: ['finance'],
+                type: 'expert',
+                achievements: ["Independent economic analysis", "Public spending reviews", "Financial crisis expertise"],
+                votes: 389
+            },
+            {
+                id: 7,
+                name: "Dr. Aoibhinn Ní Shúilleabháin",
+                expertise: "Mathematics Education, Environmental Policy",
+                background: "Associate Professor, DCU & Environmental Policy Expert",
+                location: "Dublin",
+                suitableFor: ['education', 'environment'],
+                type: 'expert',
+                achievements: ["Chair of Independent Advisory Committee for Nature Restoration", "Former Chair of Citizens' Assembly on Biodiversity Loss", "Leading mathematics education researcher"],
+                votes: 745
+            },
+            {
+                id: 8,
+                name: "Pádraic Fogarty",
+                expertise: "Rewilding, Conservation Biology",
+                background: "Environmental Conservationist & Writer",
+                location: "Ireland",
+                suitableFor: ['environment'],
+                type: 'expert',
+                achievements: ["Leading rewilding advocate in Ireland", "Author on Irish environmental issues", "Biodiversity conservation expertise"],
+                votes: 612
+            },
+            {
+                id: 9,
+                name: "Shamim Malekmian",
+                expertise: "Immigration Policy, Investigative Journalism",
+                background: "Journalist, Dublin Inquirer",
+                location: "Dublin",
+                suitableFor: ['justice', 'foreign'],
+                type: 'community',
+                achievements: ["Specialist immigration coverage", "Community-focused journalism", "Understanding of integration challenges"],
+                votes: 487
+            },
+            {
+                id: 10,
+                name: "Niamh Garvey",
+                expertise: "Disability Rights, Inclusive Education",
+                background: "Autistic Author & Disability Advocate",
+                location: "Ireland",
+                suitableFor: ['education', 'justice'],
+                type: 'community',
+                achievements: ["Editor of 'Wired Our Own Way' anthology", "Autism advocacy and representation", "Inclusive education champion"],
+                votes: 693
+            },
+            {
+                id: 11,
+                name: "Aidan O'Brien",
+                expertise: "Internet Governance, Counter-Extremism",
+                background: "Digital Policy & Security Expert",
+                location: "Ireland",
+                suitableFor: ['justice', 'technology'],
+                type: 'expert',
+                achievements: ["Internet governance expertise", "Counter-violent extremism specialist", "Disinformation research"],
+                votes: 558
+            },
+            {
+                id: 12,
+                name: "Dr. Abeba Birhane",
+                expertise: "AI Ethics, Cognitive Science",
+                background: "AI Accountability Researcher, Trinity College Dublin",
+                location: "Dublin",
+                suitableFor: ['technology', 'education'],
+                type: 'expert',
+                achievements: ["Founder & PI of AI accountability research", "AI audits & evaluation expert", "Critical data studies pioneer"],
+                votes: 892
+            },
+            {
+                id: 13,
+                name: "Tara Connolly",
+                expertise: "Energy Transition, Climate Justice",
+                background: "Former Greenpeace, now Beyond Fossil Fuels",
+                location: "Brussels",
+                suitableFor: ['energy', 'environment', 'foreign'],
+                type: 'expert',
+                achievements: ["EU energy transition expertise", "Former Greenpeace & Friends of the Earth", "Climate justice advocacy"],
+                votes: 734
+            },
+            {
+                id: 14,
+                name: "John Gibbons",
+                expertise: "Climate Journalism, Environmental Advocacy",
+                background: "Campaigning Journalist & Author",
+                location: "Ireland",
+                suitableFor: ['environment', 'energy'],
+                type: 'community',
+                achievements: ["Author of 'The Lie of the Land' (2025)", "Climate emergency campaigning", "ThinkOrSwim.ie founder"],
+                votes: 687
+            },
+            {
+                id: 15,
+                name: "Saoirse McHugh",
+                expertise: "Nature Conservation, Land Use, Food Systems",
+                background: "Environmental Advocate & Rural Community Leader",
+                location: "Achill Island",
+                suitableFor: ['rural', 'environment'],
+                type: 'community',
+                achievements: ["Rural land management expertise", "Sustainable food systems advocate", "Island community leadership"],
+                votes: 591
+            },
+            {
+                id: 16,
+                name: "Simon McGarr",
+                expertise: "Data Protection Law, Legal Innovation",
+                background: "Solicitor & Legal Technology Consultant",
+                location: "Dublin",
+                suitableFor: ['justice', 'technology'],
+                type: 'expert',
+                achievements: ["Data protection law specialist", "TheGist.ie newsletter author", "Legal education innovator"],
+                votes: 498
+            },
+            {
+                id: 17,
+                name: "Oisín McGann",
+                expertise: "Creative Industries, Climate Communication",
+                background: "Author & Commercial Artist",
+                location: "Ireland",
+                suitableFor: ['education', 'environment'],
+                type: 'community',
+                achievements: ["30+ years in commercial art", "20+ years as published author", "Climate-focused creative advocacy"],
+                votes: 445
+            },
+            {
+                id: 18,
+                name: "Prof. Hannah Daly",
+                expertise: "Sustainable Energy, Energy Policy",
+                background: "Professor of Sustainable Energy, UCC",
+                location: "Cork",
+                suitableFor: ['energy', 'environment'],
+                type: 'expert',
+                achievements: ["Leading sustainable energy researcher", "Irish Times columnist", "Energy transition policy expertise"],
+                votes: 823
+            }
+        ];
+
+        // Initialize the app
+        function init() {
+            renderPositions();
+            renderCandidates();
+        }
+
+        // Theme toggle
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.className = isDarkMode ? 'dark' : 'light';
+            document.getElementById('theme-icon').textContent = isDarkMode ? '☀️' : '🌙';
+        }
+
+        // Render government positions
+        function renderPositions() {
+            const container = document.getElementById('positions-container');
+            container.innerHTML = positions.map(position => {
+                const selected = selectedCabinet[position.id];
+                return `
+                    <div class="position-card">
+                        <div class="position-header">
+                            <h3 class="position-title">${position.title}</h3>
+                            <button class="select-btn" onclick="setActivePosition('${position.id}')">
+                                ${selected ? 'Change' : 'Select'}
+                            </button>
+                        </div>
+                        <p class="position-desc">${position.description}</p>
+                        ${selected ? `
+                            <div class="selected-candidate">
+                                <p style="font-weight: 500; font-size: 0.875rem; color: var(--text-primary);">${selected.name}</p>
+                                <p style="font-size: 0.75rem; color: var(--text-secondary);">${selected.expertise}</p>
+                            </div>
+                        ` : `
+                            <div class="no-candidate">
+                                <p style="font-size: 0.875rem;">No candidate selected</p>
+                            </div>
+                        `}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Render candidates
+        function renderCandidates() {
+            const container = document.getElementById('candidates-grid');
+            const noResults = document.getElementById('no-results');
+            
+            let filtered = candidates;
+            
+            if (searchTerm) {
+                filtered = filtered.filter(candidate => 
+                    candidate.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    candidate.expertise.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    candidate.background.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+            }
+            
+            if (activePosition) {
+                filtered = filtered.filter(candidate => 
+                    candidate.suitableFor.includes(activePosition)
+                );
+            }
+
+            if (filtered.length === 0) {
+                container.classList.add('hidden');
+                noResults.classList.remove('hidden');
+                return;
+            }
+
+            container.classList.remove('hidden');
+            noResults.classList.add('hidden');
+            
+            container.innerHTML = filtered.map(candidate => `
+                <div class="candidate-card">
+                    <div class="card-header">
+                        <h3 class="candidate-name">${candidate.name}</h3>
+                        <div class="card-meta">
+                            <span class="type-badge type-${candidate.type}">${candidate.type}</span>
+                            <span class="votes">⭐ ${candidate.votes}</span>
+                        </div>
+                    </div>
+                    
+                    <p class="candidate-info">${candidate.background}</p>
+                    <p class="candidate-expertise">${candidate.expertise}</p>
+                    <p class="candidate-info">📍 ${candidate.location}</p>
+                    
+                    <div class="achievements">
+                        ${candidate.achievements.slice(0, 2).map(achievement => 
+                            `<div class="achievement">🏆 ${achievement}</div>`
+                        ).join('')}
+                    </div>
+                    
+                    ${activePosition ? `
+                        <button class="select-full-btn" onclick="selectCandidate('${activePosition}', ${candidate.id})">
+                            Select for ${positions.find(p => p.id === activePosition)?.title}
+                        </button>
+                    ` : `
+                        <div>
+                            <p style="font-size: 0.75rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--text-secondary);">
+                                Suitable for:
+                            </p>
+                            <div class="action-buttons">
+                                ${candidate.suitableFor.slice(0, 3).map(posId => {
+                                    const pos = positions.find(p => p.id === posId);
+                                    return pos ? `
+                                        <button class="action-btn" onclick="selectCandidate('${posId}', ${candidate.id})">
+                                            ${pos.title.replace('Minister for ', '').replace('Minister of ', '')}
+                                        </button>
+                                    ` : '';
+                                }).join('')}
+                            </div>
+                        </div>
+                    `}
+                </div>
+            `).join('');
+        }
+
+        // Set active position
+        function setActivePosition(positionId) {
+            activePosition = activePosition === positionId ? '' : positionId;
+            updateCandidatesTitle();
+            renderCandidates();
+        }
+
+        // Clear active position
+        function clearActivePosition() {
+            activePosition = '';
+            updateCandidatesTitle();
+            renderCandidates();
+        }
+
+        // Update candidates section title
+        function updateCandidatesTitle() {
+            const title = document.getElementById('candidates-title');
+            const viewAllBtn = document.getElementById('view-all-btn');
+            
+            if (activePosition) {
+                const position = positions.find(p => p.id === activePosition);
+                title.textContent = `Candidates for ${position.title}`;
+                viewAllBtn.classList.remove('hidden');
+            } else {
+                title.textContent = 'All Candidates';
+                viewAllBtn.classList.add('hidden');
+            }
+        }
+
+        // Select candidate for position
+        function selectCandidate(positionId, candidateId) {
+            const candidate = candidates.find(c => c.id === candidateId);
+            selectedCabinet[positionId] = candidate;
+            renderPositions();
+        }
+
+        // Filter candidates based on search
+        function filterCandidates() {
+            searchTerm = document.getElementById('search-input').value;
+            renderCandidates();
+        }
+
+        // Show nomination modal
+        function showNomination() {
+            document.getElementById('nomination-modal').classList.remove('hidden');
+        }
+
+        // Hide nomination modal
+        function hideNomination() {
+            document.getElementById('nomination-modal').classList.add('hidden');
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
