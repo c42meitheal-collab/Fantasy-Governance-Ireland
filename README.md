@@ -2,6 +2,8 @@
 
 Build your ideal Irish government with the right people for the right jobs. Inspired by "The Paul Principle" - the idea that Ireland has many competent experts who would be better suited to governance than traditional politicians.
 
+https://c42meitheal-collab.github.io/Fantasy-Governance-Ireland/
+
 ## 🌟 The Paul Principle
 
 > "There are many 'Pauls' in Irish life - competent people with track records who would be much better suited to particular postings than the traditional political class."
